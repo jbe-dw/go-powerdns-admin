@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"models"
+	"github.com/jbe-dw/go-powerdns-admin/models"
 )
 
 // ListServersReader is a Reader for the ListServers structure.

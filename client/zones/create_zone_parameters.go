@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"models"
+	"github.com/jbe-dw/go-powerdns-admin/models"
 )
 
 // NewCreateZoneParams creates a new CreateZoneParams object

@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"models"
+	"github.com/jbe-dw/go-powerdns-admin/models"
 )
 
 // NewPatchZoneParams creates a new PatchZoneParams object
