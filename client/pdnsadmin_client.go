@@ -23,7 +23,7 @@ import (
 	"github.com/jbe-dw/go-powerdns-admin/client/zones"
 )
 
-// Default pdnsadmin client HTTP client.
+// Default pdnsadmin HTTP client.
 var Default = NewHTTPClient(nil)
 
 const (
@@ -38,14 +38,14 @@ const (
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file
 var DefaultSchemes = []string{"http"}
 
-// NewHTTPClient creates a new pdnsadmin client HTTP client.
-func NewHTTPClient(formats strfmt.Registry) *PdnsadminClient {
+// NewHTTPClient creates a new pdnsadmin HTTP client.
+func NewHTTPClient(formats strfmt.Registry) *Pdnsadmin {
 	return NewHTTPClientWithConfig(formats, nil)
 }
 
-// NewHTTPClientWithConfig creates a new pdnsadmin client HTTP client,
+// NewHTTPClientWithConfig creates a new pdnsadmin HTTP client,
 // using a customizable transport config.
-func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *PdnsadminClient {
+func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Pdnsadmin {
 	// ensure nullable parameters have default
 	if cfg == nil {
 		cfg = DefaultTransportConfig()
@@ -56,14 +56,14 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Pdn
 	return New(transport, formats)
 }
 
-// New creates a new pdnsadmin client client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *PdnsadminClient {
+// New creates a new pdnsadmin client
+func New(transport runtime.ClientTransport, formats strfmt.Registry) *Pdnsadmin {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
 	}
 
-	cli := new(PdnsadminClient)
+	cli := new(Pdnsadmin)
 	cli.Transport = transport
 	cli.Account = account.New(transport, formats)
 	cli.Apikey = apikey.New(transport, formats)
@@ -118,8 +118,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// PdnsadminClient is a client for pdnsadmin client
-type PdnsadminClient struct {
+// Pdnsadmin is a client for pdnsadmin
+type Pdnsadmin struct {
 	Account account.ClientService
 
 	Apikey apikey.ClientService
@@ -146,7 +146,7 @@ type PdnsadminClient struct {
 }
 
 // SetTransport changes the transport on the client and all its subresources
-func (c *PdnsadminClient) SetTransport(transport runtime.ClientTransport) {
+func (c *Pdnsadmin) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Account.SetTransport(transport)
 	c.Apikey.SetTransport(transport)

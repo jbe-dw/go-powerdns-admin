@@ -6,8 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"strconv"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -24,7 +22,7 @@ type APIKey struct {
 	Description string `json:"description,omitempty"`
 
 	// domains to which this apikey has access
-	Domains []PDNSAdminZones `json:"domains"`
+	Domains PDNSAdminZones `json:"domains,omitempty"`
 
 	// The ID for this key, used in the ApiKey URL endpoint.
 	// Read Only: true
@@ -64,15 +62,11 @@ func (m *APIKey) validateDomains(formats strfmt.Registry) error {
 		return nil
 	}
 
-	for i := 0; i < len(m.Domains); i++ {
-
-		if err := m.Domains[i].Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("domains" + "." + strconv.Itoa(i))
-			}
-			return err
+	if err := m.Domains.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("domains")
 		}
-
+		return err
 	}
 
 	return nil
