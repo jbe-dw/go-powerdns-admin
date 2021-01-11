@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"models"
+	"github.com/jbe-dw/go-powerdns-admin/models"
 )
 
 // NewAPIUpdateApikeyParams creates a new APIUpdateApikeyParams object
