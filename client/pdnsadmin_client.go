@@ -10,17 +10,17 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"client/account"
-	"client/apikey"
-	"client/config"
-	"client/pdnsadmin_zones"
-	"client/search"
-	"client/servers"
-	"client/stats"
-	"client/user"
-	"client/zonecryptokey"
-	"client/zonemetadata"
-	"client/zones"
+	"github.com/jbe-dw/go-powerdns-admin/client/account"
+	"github.com/jbe-dw/go-powerdns-admin/client/apikey"
+	"github.com/jbe-dw/go-powerdns-admin/client/config"
+	"github.com/jbe-dw/go-powerdns-admin/client/pdnsadmin_zones"
+	"github.com/jbe-dw/go-powerdns-admin/client/search"
+	"github.com/jbe-dw/go-powerdns-admin/client/servers"
+	"github.com/jbe-dw/go-powerdns-admin/client/stats"
+	"github.com/jbe-dw/go-powerdns-admin/client/user"
+	"github.com/jbe-dw/go-powerdns-admin/client/zonecryptokey"
+	"github.com/jbe-dw/go-powerdns-admin/client/zonemetadata"
+	"github.com/jbe-dw/go-powerdns-admin/client/zones"
 )
 
 // Default pdnsadmin client HTTP client.
