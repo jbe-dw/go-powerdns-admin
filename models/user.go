@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -39,8 +40,8 @@ type User struct {
 	// The hashed password for this user
 	Password string `json:"password,omitempty"`
 
-	// The ID of the role
-	RoleID int64 `json:"role_id,omitempty"`
+	// role
+	Role *PDNSAdminRole `json:"role,omitempty"`
 
 	// The username for this user (unique, immutable)
 	Username string `json:"username,omitempty"`
@@ -48,6 +49,33 @@ type User struct {
 
 // Validate validates this user
 func (m *User) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateRole(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *User) validateRole(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Role) { // not required
+		return nil
+	}
+
+	if m.Role != nil {
+		if err := m.Role.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("role")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
